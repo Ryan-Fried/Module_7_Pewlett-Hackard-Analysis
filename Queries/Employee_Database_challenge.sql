@@ -48,3 +48,40 @@ ON (e.emp_no = ti.emp_no)
 WHERE (de.to_date = '9999-01-01')
 AND (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
 ORDER BY e.emp_no
+
+-- Tables for ReadMe
+SELECT DISTINCT ON (de.emp_no) de.emp_no,
+	de.to_date
+INTO total_current
+FROM dept_emp as de
+WHERE (to_date = '9999-01-01')
+
+SELECT COUNT (emp_no) FROM total_current
+SELECT * FROM mentorship_eligibility
+
+-- Create mentorship_titles table
+SELECT me.title, me.emp_no
+INTO mentorship_candidates
+FROM mentorship_eligibility as me
+
+SELECT COUNT (mc.title), mc.title
+INTO mentorship_titles
+FROM mentorship_candidates as mc
+GROUP BY (mc.title)
+ORDER BY COUNT (mc.title) DESC;
+
+-- Create titles_count table
+SELECT COUNT (ti.title), ti.title
+INTO titles_count
+FROM titles as ti
+WHERE (ti.to_date = '9999-01-01')
+GROUP BY (ti.title)
+ORDER BY COUNT (ti.title) DESC;
+
+SELECT * FROM retiring_titles
+SELECT * FROM mentorship_titles
+
+
+	
+
+
